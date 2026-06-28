@@ -1,5 +1,7 @@
 # build output
 dist/
+# generated self-contained preview pages (postbuild / npm run previews)
+previews/
 # generated types
 .astro/
 # dependencies

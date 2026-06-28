@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import LinkGrid from "../components/LinkGrid.astro";
+import { regiment } from "../config";
+---
+
+<Base>
+  <Hero />
+
+  <!-- Solid panel that scrolls up over the fixed splash art.
+       The ::before gives a soft gradient lip so there's no hard edge. -->
+  <div class="content-over">
+    <main>
+      <LinkGrid />
+      <About />
+    </main>
+
+    <footer class="border-t border-border bg-surface">
+      <div
+        class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-8 text-sm text-muted sm:flex-row"
+      >
+        <span>{regiment.name} — a Foxhole regiment.</span>
+        <span class="text-xs">Not affiliated with Siege Camp / Clapfoot.</span>
+      </div>
+    </footer>
+  </div>
+</Base>
+
+<style>
+  .content-over {
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+  }
+
+  /* Gradient lip: fades the splash art into the solid panel above the fold. */
+  .content-over::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -160px;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+  }
+</style>

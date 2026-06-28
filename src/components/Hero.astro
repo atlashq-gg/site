@@ -1,0 +1,90 @@
+---
+import { regiment } from "../config";
+import { discord } from "../data/links";
+---
+
+<header
+  class="relative z-0 flex min-h-[88svh] flex-col items-center justify-center px-6 py-20 text-center"
+>
+  <!--
+    PLACEHOLDER SPLASH ART.
+    Fixed to the viewport so the page content scrolls up over it. To use real art:
+    drop an image in src/assets/ and replace this <div> with an Astro <Image> (or
+    set it as a background). The art is isolated to this block.
+  -->
+  <div class="hero-art" aria-hidden="true"></div>
+
+  <div class="relative z-10 mx-auto max-w-3xl">
+    <p
+      class="mb-4 text-sm font-semibold uppercase tracking-[0.35em] text-accent-strong"
+    >
+      Colonial Foxhole Regiment
+    </p>
+
+    <h1
+      class="font-display text-5xl font-bold uppercase leading-none tracking-tight sm:text-7xl"
+    >
+      {regiment.name}
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-xl text-lg text-muted">
+      {regiment.tagline}
+    </p>
+
+    <div class="mt-10 flex flex-col items-center gap-3">
+      <a
+        href={discord.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-md bg-accent px-8 py-4 text-lg font-semibold uppercase tracking-wide text-accent-contrast shadow-lg transition hover:bg-accent-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong"
+      >
+        {discord.label}
+      </a>
+      <span class="max-w-md text-sm text-muted">{discord.blurb}</span>
+    </div>
+  </div>
+
+  <!-- Scroll cue pinned to the bottom of the splash -->
+  <a
+    href="#links"
+    class="absolute bottom-20 left-1/2 z-10 -translate-x-1/2 text-sm uppercase tracking-widest text-muted transition hover:text-text"
+    aria-label="Jump to quick links"
+  >
+    ↓ Quick Links
+  </a>
+</header>
+
+<style>
+  /* Placeholder "splash art": layered gradients + a faint topographic grid.
+     Fixed to the viewport so content scrolls over it; tints follow the active
+     faction via the --accent variables. */
+  .hero-art {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(
+        120% 75% at 50% -10%,
+        color-mix(in srgb, var(--accent) 38%, transparent),
+        transparent 60%
+      ),
+      linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+  }
+
+  .hero-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      black,
+      transparent 75%
+    );
+    mask-image: radial-gradient(ellipse at center, black, transparent 75%);
+  }
+</style>

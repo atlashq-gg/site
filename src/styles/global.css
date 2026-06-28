@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+/*
+  ── Faction theming ────────────────────────────────────────────────────────
+  Both palettes are defined here. Which one is active is decided at BUILD TIME
+  by `faction` in src/config.ts (Base.astro stamps it onto <html data-faction>).
+  Only the accent colors swing between factions; the gritty neutral base is shared.
+
+  To tweak colors, edit the values below. To switch which faction shows, edit
+  src/config.ts — not this file.
+*/
+
+:root {
+  /* Shared neutral war base */
+  --bg: #13120d;
+  --surface: #1c1a13;
+  --surface-2: #26231a;
+  --text: #ece7d8;
+  --muted: #a39d88;
+  --border: #3a3527;
+
+  /* Default accent = Colonial (overridden below by data-faction) */
+  --accent: #7f8c3c;
+  --accent-strong: #9fb24e;
+  --accent-contrast: #11130a;
+}
+
+[data-faction="colonial"] {
+  --accent: #7f8c3c; /* olive green */
+  --accent-strong: #9fb24e;
+  --accent-contrast: #11130a;
+}
+
+[data-faction="warden"] {
+  --accent: #2f6f9f; /* steel blue */
+  --accent-strong: #4a93c8;
+  --accent-contrast: #07111a;
+}
+
+/* Expose the variables as Tailwind color/font tokens (bg-accent, text-muted, …) */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-contrast: var(--accent-contrast);
+
+  --font-display: "Oswald", "Bebas Neue", "Arial Narrow", system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

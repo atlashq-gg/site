@@ -4,37 +4,58 @@
   ── Faction theming ────────────────────────────────────────────────────────
   Both palettes are defined here. Which one is active is decided at BUILD TIME
   by `faction` in src/config.ts (Base.astro stamps it onto <html data-faction>).
-  Only the accent colors swing between factions; the gritty neutral base is shared.
+  Each faction carries its own full palette (dark base + accents) because the
+  two factions read very differently — Colonial is warm olive/gold, Warden is
+  cold navy/steel.
+
+  NOTE: these colors are PLACEHOLDER while the regiment works on branding.
 
   To tweak colors, edit the values below. To switch which faction shows, edit
   src/config.ts — not this file.
+
+  Per-faction tokens:
+    --bg               page background (darkest)
+    --surface          panels / footer
+    --surface-2        elevated surface (cards, dividers)
+    --text             body text
+    --muted            secondary text / borders-ish
+    --border           hairlines
+    --accent           primary brand color — the CTA button fill (a light metal:
+                       gold for Colonial, steel for Warden)
+    --accent-strong    hover / emphasis (a touch brighter than --accent)
+    --accent-contrast  text that sits ON --accent (dark)
+    --accent-2         secondary accent — the red from the crest stars
 */
 
-:root {
-  /* Shared neutral war base */
-  --bg: #13120d;
-  --surface: #1c1a13;
-  --surface-2: #26231a;
-  --text: #ece7d8;
-  --muted: #a39d88;
-  --border: #3a3527;
-
-  /* Default accent = Colonial (overridden below by data-faction) */
-  --accent: #7f8c3c;
-  --accent-strong: #9fb24e;
-  --accent-contrast: #11130a;
-}
-
+:root,
 [data-faction="colonial"] {
-  --accent: #7f8c3c; /* olive green */
-  --accent-strong: #9fb24e;
-  --accent-contrast: #11130a;
+  /* Colonial — warm olive base, gold brand, red star accent */
+  --bg: #181c14;
+  --surface: #2c3524;
+  --surface-2: #40452e;
+  --text: #ece7d8;
+  --muted: #b1a279;
+  --border: #4a4f37;
+
+  --accent: #cfb157; /* gold */
+  --accent-strong: #ddc275;
+  --accent-contrast: #181c14;
+  --accent-2: #8d332a; /* brick red */
 }
 
 [data-faction="warden"] {
-  --accent: #2f6f9f; /* steel blue */
-  --accent-strong: #4a93c8;
-  --accent-contrast: #07111a;
+  /* Warden — cold navy base, steel brand, red star accent */
+  --bg: #0c1c30;
+  --surface: #143256;
+  --surface-2: #1e4976;
+  --text: #eaf0f3;
+  --muted: #b5bdc0;
+  --border: #2b5078;
+
+  --accent: #bdced5; /* steel / silver-blue */
+  --accent-strong: #d6e2e8;
+  --accent-contrast: #0c1c30;
+  --accent-2: #92352d; /* brick red */
 }
 
 /* Expose the variables as Tailwind color/font tokens (bg-accent, text-muted, …) */
@@ -48,6 +69,7 @@
   --color-accent: var(--accent);
   --color-accent-strong: var(--accent-strong);
   --color-accent-contrast: var(--accent-contrast);
+  --color-accent-2: var(--accent-2);
 
   --font-display: "Oswald", "Bebas Neue", "Arial Narrow", system-ui, sans-serif;
   --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;

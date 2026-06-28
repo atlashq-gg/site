@@ -1,6 +1,9 @@
 ---
 import "../styles/global.css";
+import { getImage } from "astro:assets";
 import { faction, regiment } from "../config";
+import broadside from "../assets/broadside.png";
+import { activeCrest, inactiveCrest } from "../lib/crest";
 
 interface Props {
   title?: string;
@@ -11,6 +14,20 @@ const {
   title = regiment.name,
   description = regiment.tagline,
 } = Astro.props;
+
+// Favicon + share image follow the active faction. The crest doubles as the
+// favicon (downscaled here); the splash art doubles as the social preview.
+const favicon = await getImage({ src: activeCrest, width: 64, height: 64, format: "png" });
+const appleIcon = await getImage({ src: activeCrest, width: 180, height: 180, format: "png" });
+const ogImage = await getImage({ src: broadside, width: 1200, format: "jpg", quality: 80 });
+
+// Run the inactive faction's crest through the pipeline so Astro doesn't copy
+// its full-size original into dist/ (see src/lib/crest.ts). The 1px derivative
+// is never referenced — it just suppresses the multi-MB original.
+await getImage({ src: inactiveCrest, width: 1, height: 1, format: "webp" });
+const ogImageUrl = Astro.site
+  ? new URL(ogImage.src, Astro.site).href
+  : ogImage.src;
 ---
 
 <!doctype html>
@@ -18,7 +35,8 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href={favicon.src} />
+    <link rel="apple-touch-icon" href={appleIcon.src} />
     <title>{title}</title>
     <meta name="description" content={description} />
 
@@ -26,7 +44,9 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
   </head>
   <body class="min-h-screen text-text antialiased">
     <slot />

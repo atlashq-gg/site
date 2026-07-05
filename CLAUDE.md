@@ -50,10 +50,17 @@ src/
     LinkGrid.astro     # "Quick Links" section, maps over links data
     LinkCard.astro     # one link tile
   pages/index.astro    # composes: Hero → LinkGrid → footer; defines the (transparent) .content-over wrapper + artist credit
+docs/branding/         # artist's palette swatches ({Colonial,Warden}ColorPalette.png) — reference only, not part of the build
 ```
 
 (There is no `public/` directory — the favicon is generated from the crest in
 `Base.astro`, so nothing is copied verbatim into `dist/`.)
+
+The swatch PNGs in `docs/branding/` are the source of truth behind the CSS
+palettes: their stripes map 1:1 to `--muted`, `--surface`, `--surface-2`, and
+`--accent` in `global.css`. Each also has a red stripe the site deliberately
+does NOT use (the red was dropped from the branding; it survives only as the
+sticky-note push-pin on Warden builds).
 
 ## Key conventions & decisions
 

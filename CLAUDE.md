@@ -7,8 +7,8 @@ Guidance for working in this repository.
 A **static landing page** for **ATLAS**, a Colonial Foxhole regiment formed from the
 merger of *New Colonial Republic (NCR)* and *High Velocity Logistics (HvL)*. It's a
 single-page hub: a full-height splash hero, a Discord call-to-action, and a grid of
-links to the regiment's tools/content. Someone else handles hosting — the
-deliverable is just the built static site in `dist/`.
+links to the regiment's tools/content. Hosted on **GitHub Pages** — every push
+to `main` builds and deploys automatically (see "Deploying" below).
 
 > **Branding is FINAL.** The splash artwork (`broadside.png`), both faction
 > logos/crests (`ATLAS{Colonial,Warden}.png`), and the color palettes in
@@ -73,9 +73,12 @@ does NOT use (the red was dropped from the branding).
 
 - **Faction theme is admin/build-time, NOT a visitor toggle.** ATLAS is mostly
   Colonial (green) but sometimes plays Warden (blue). Both palettes exist in
-  `global.css`; which one ships is set by `DEFAULT_FACTION` in `src/config.ts`, or
-  overridden at build via the `PUBLIC_FACTION` env var (`PUBLIC_FACTION=warden npm run build`).
-  Switching faction = change the value, rebuild, redeploy. Do not reintroduce a
+  `global.css`; which one ships is set by `FACTION` in `src/config.ts`.
+  Switching faction = change that value and push to main (auto-deploys) —
+  content-as-code, same as any other content edit. The `PUBLIC_FACTION` env
+  override in `config.ts` is internal plumbing for `npm run previews` (it
+  builds both factions in one run) — don't document it as a user-facing
+  switch, and don't remove it. Do not reintroduce a
   client-side toggle (the user explicitly rejected it — too much JS / avoids a flash).
 
 - **Colors flow through CSS variables.** Each faction carries its OWN full palette
@@ -119,6 +122,23 @@ does NOT use (the red was dropped from the branding).
 - **Zero JavaScript.** The build should ship no `.js`. If a feature seems to need
   client JS, prefer a CSS-only or build-time solution first.
 
+## Deploying
+
+GitHub Pages via GitHub Actions: `.github/workflows/deploy.yml` builds and
+publishes `dist/` on every push to `main` (also manually triggerable via
+`workflow_dispatch`). One-time repo setup lives in GitHub → Settings → Pages:
+source must be "GitHub Actions". The site currently serves at the default
+project URL `https://p0etc.github.io/atlas-landingpage/` — hence the `base`
+path in `astro.config.mjs`. The regiment owns `atlashq.gg`, but its DNS is
+handled by someone else and isn't set up yet; once it is, set the custom
+domain in the Pages settings and update `site`/`base` in `astro.config.mjs`
+(the comment there says exactly what to change). To ship the Warden theme,
+edit `FACTION` in `src/config.ts` and push — no workflow setting.
+
+The repo has **no open-source license** (all rights reserved), and the artwork
+is used with the artists' permission for this site only — see "License &
+artwork rights" in `README.md`. Don't add a license file without the user.
+
 ## Sharing without deploying
 
 `scripts/make-preview.mjs` inlines a built `dist/` into one **self-contained**
@@ -142,9 +162,9 @@ Use the browser preview (`preview_*` tools) to check layout/appearance, and run
 
 - All link URLs in `src/data/links.ts` except Discord are placeholders (`#`) — the
   regiment fills in their real tool URLs. Discord is live: `https://discord.gg/atlashq`.
-- `site` in `astro.config.mjs` is a placeholder (`https://example.com`) — whoever
-  deploys sets the real URL, otherwise the absolute `og:image` share-preview URLs
-  point at example.com and social embeds show no image.
+- `site`/`base` in `astro.config.mjs` point at the default GitHub Pages
+  project URL for now. Switch to `https://atlashq.gg` (no `base`) once the
+  domain's DNS is live — it's managed outside this repo, timing unknown.
 - Branding is FINAL: splash art (`broadside.png`), both faction crests
   (`ATLAS{Colonial,Warden}.png`), and the color palettes.
 - The hero dissolve is a plain mask-fade into `--bg`. It's palette-independent,

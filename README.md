@@ -17,7 +17,10 @@ npm run preview  # preview the built ./dist locally
 npm run previews # self-contained share files for both factions (see below)
 ```
 
-The deployer just serves the contents of `dist/` as static files.
+Deploys are automatic: every push to `main` builds the site and publishes it to
+GitHub Pages (see `.github/workflows/deploy.yml`). It currently serves at
+<https://p0etc.github.io/atlas-landingpage/>; it moves to <https://atlashq.gg>
+once the domain's DNS is set up.
 
 ## Show it to people without deploying
 
@@ -43,7 +46,7 @@ Everything you'd normally change lives in three places:
 
 | What | Where |
 | --- | --- |
-| Faction theme (Colonial / Warden) | `src/config.ts` → `faction` |
+| Faction theme (Colonial / Warden) | `src/config.ts` → `FACTION` |
 | Regiment name & tagline | `src/config.ts` → `regiment` |
 | Splash-art credit (footer) | `src/config.ts` → `splashArtist` |
 | Crest credit (footer) | `src/config.ts` → `crestArtists` |
@@ -56,10 +59,8 @@ Everything you'd normally change lives in three places:
 The site is mostly Colonial (green) but can switch to Warden (blue). This is an
 **admin/build-time** setting — visitors can't change it; everyone sees what's set.
 
-- Edit `src/config.ts`: `const DEFAULT_FACTION = "colonial"` → `"warden"`, **or**
-- Build with an env var (no code edit): `PUBLIC_FACTION=warden npm run build`
-
-Then rebuild and redeploy.
+Edit `src/config.ts`: `const FACTION = "colonial"` → `"warden"`, then
+commit and merge to `main` — the site rebuilds and deploys automatically.
 
 ### Add or change links
 
@@ -93,3 +94,13 @@ the splash art, the fade may want a tweak — the how and why are documented in
 [`CLAUDE.md`](./CLAUDE.md).
 
 > Note: the art, crests, and colors are the regiment's final branding.
+
+## License & artwork rights
+
+This repository has **no open-source license** — all rights reserved. The code
+is published so the regiment can see and host the site, not for reuse.
+
+The artwork (the splash art, both faction crests, and the palette swatches in
+`docs/branding/`) is **© its artists** and is used here with their permission
+for this site only. It is not covered by any license and may **not** be copied,
+reused, or redistributed outside this project.

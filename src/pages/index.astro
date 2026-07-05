@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import LinkGrid from "../components/LinkGrid.astro";
-import { regiment, splashArtist } from "../config";
+import { regiment, splashArtist, crestArtists } from "../config";
 ---
 
 <Base>
@@ -17,28 +17,45 @@ import { regiment, splashArtist } from "../config";
     </main>
 
     <footer class="border-t border-border bg-surface">
-      <div
-        class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-8 text-sm text-muted sm:flex-row"
-      >
-        <span>{regiment.name} — Foxhole regiment.</span>
-        {
-          splashArtist.name && (
-            <span class="text-xs">
-              Splash art by{" "}
-              {splashArtist.email ? (
-                <a
-                  href={`mailto:${splashArtist.email}`}
-                  class="font-medium text-accent-strong underline-offset-2 transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong"
-                >
-                  {splashArtist.name}
-                </a>
-              ) : (
-                splashArtist.name
-              )}
-            </span>
-          )
-        }
-        <span class="text-xs">Not affiliated with Siege Camp / Clapfoot.</span>
+      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-sm text-muted">
+        <div class="flex flex-col items-center justify-between gap-2 sm:flex-row">
+          <span>{regiment.name} — Foxhole regiment.</span>
+          <span class="text-xs">Not affiliated with Siege Camp / Clapfoot.</span>
+        </div>
+
+        <!-- Art credits. The crest credit is names-only by the artists' request. -->
+        <div
+          class="flex flex-col items-center justify-between gap-1 text-xs sm:flex-row"
+        >
+          {
+            splashArtist.name && (
+              <span>
+                Splash art by{" "}
+                {splashArtist.email ? (
+                  <a
+                    href={`mailto:${splashArtist.email}`}
+                    class="font-medium text-accent-strong underline-offset-2 transition hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong"
+                  >
+                    {splashArtist.name}
+                  </a>
+                ) : (
+                  <span class="font-medium text-accent-strong">{splashArtist.name}</span>
+                )}
+              </span>
+            )
+          }
+          {
+            crestArtists.length > 0 && (
+              <span>
+                Crest by{" "}
+                {crestArtists.map(({ name, role }, i) => (
+                  /* prettier-ignore */
+                  <>{i > 0 && ", "}<span class="font-medium text-accent-strong">{name}</span> ({role})</>
+                ))}
+              </span>
+            )
+          }
+        </div>
       </div>
     </footer>
   </div>

@@ -50,8 +50,16 @@ src/
     LinkGrid.astro     # "Quick Links" section, maps over links data
     LinkCard.astro     # one link tile
   pages/index.astro    # composes: Hero → LinkGrid → footer; defines the (transparent) .content-over wrapper + artist credit
-public/favicon.svg     # legacy placeholder; the live favicon is generated from the crest
+docs/branding/         # artist's palette swatches ({Colonial,Warden}ColorPalette.png) — reference only, not part of the build
 ```
+
+(There is no `public/` directory — the favicon is generated from the crest in
+`Base.astro`, so nothing is copied verbatim into `dist/`.)
+
+The swatch PNGs in `docs/branding/` are the source of truth behind the CSS
+palettes: their stripes map 1:1 to `--muted`, `--surface`, `--surface-2`, and
+`--accent` in `global.css`. Each also has a red stripe the site deliberately
+does NOT use (the red was dropped from the branding).
 
 ## Key conventions & decisions
 
@@ -59,7 +67,9 @@ public/favicon.svg     # legacy placeholder; the live favicon is generated from 
   the regiment name/tagline, or the splash-art credit means editing `src/config.ts`
   or `src/data/links.ts` — not the `.astro` components. (The splash artist is
   credited in the footer via `splashArtist` in `src/config.ts` — name + optional
-  mailto; leave `email: ""` to show the name without a link.)
+  mailto; leave `email: ""` to show the name without a link. The crest
+  contributors are credited via `crestArtists` in the same file — names + roles
+  only, deliberately WITHOUT links: the artists asked for no socials/email.)
 
 - **Faction theme is admin/build-time, NOT a visitor toggle.** ATLAS is mostly
   Colonial (green) but sometimes plays Warden (blue). Both palettes exist in
@@ -132,6 +142,9 @@ Use the browser preview (`preview_*` tools) to check layout/appearance, and run
 
 - All link URLs in `src/data/links.ts` except Discord are placeholders (`#`) — the
   regiment fills in their real tool URLs. Discord is live: `https://discord.gg/atlashq`.
+- `site` in `astro.config.mjs` is a placeholder (`https://example.com`) — whoever
+  deploys sets the real URL, otherwise the absolute `og:image` share-preview URLs
+  point at example.com and social embeds show no image.
 - Branding is FINAL: splash art (`broadside.png`), both faction crests
   (`ATLAS{Colonial,Warden}.png`), and the color palettes.
 - The hero dissolve is a plain mask-fade into `--bg`. It's palette-independent,

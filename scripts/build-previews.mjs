@@ -21,18 +21,19 @@ function run(label, env) {
     stdio: "inherit",
     env: { ...process.env, ...env },
   });
-  if (build.status !== 0) process.exit(build.status ?? 1);
+  if (build.status !== 0) return build.status ?? 1;
 
   // When building a specific faction, make-preview detects it from the dist.
   const inline = spawnSync(process.execPath, [makePreview], { stdio: "inherit" });
-  if (inline.status !== 0) process.exit(inline.status ?? 1);
+  return inline.status ?? 1;
 }
 
 // Build each faction explicitly and inline it.
-run("Colonial", { PUBLIC_FACTION: "colonial" });
-run("Warden", { PUBLIC_FACTION: "warden" });
+let failed = run("Colonial", { PUBLIC_FACTION: "colonial" });
+if (!failed) failed = run("Warden", { PUBLIC_FACTION: "warden" });
 
-// Restore dist/ to the configured default faction (no env override).
+// Restore dist/ to the configured default faction (no env override) — even
+// after a failure above, so dist/ never sits on a non-default faction.
 console.log("\n── Restoring default build ──");
 const baseEnv = { ...process.env };
 delete baseEnv.PUBLIC_FACTION;
@@ -40,4 +41,4 @@ const restore = spawnSync(process.execPath, [astroBin, "build"], {
   stdio: "inherit",
   env: baseEnv,
 });
-process.exit(restore.status ?? 0);
+process.exit(failed || (restore.status ?? 1));

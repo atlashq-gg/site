@@ -8,7 +8,8 @@
 
   To add a link: copy one entry in `links`, fill in title/description/url.
   `category` is optional and just used as a small label on the card.
-  All URLs below are PLACEHOLDERS (#) — swap in the real ones.
+  The Discord invite is LIVE; the grid URLs below are PLACEHOLDERS (#) — swap
+  in the real ones.
 */
 
 export interface LinkItem {

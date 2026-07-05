@@ -4,9 +4,8 @@ A static, single-page hub for the regiment — a splash screen plus links to our
 Discord and the tools/content we run. Built with [Astro](https://astro.build) +
 [Tailwind CSS](https://tailwindcss.com). Ships **zero JavaScript**.
 
-> ⚠️ **Branding is work in progress.** The splash artwork, both faction logos
-> (Colonial and Warden crests), and the color palettes are all **placeholders**
-> and will likely change once the regiment finalizes its branding.
+> ✅ **Branding is final** — splash artwork, both faction crests, and the color
+> palettes.
 
 ## Develop
 
@@ -46,6 +45,7 @@ Everything you'd normally change lives in three places:
 | --- | --- |
 | Faction theme (Colonial / Warden) | `src/config.ts` → `faction` |
 | Regiment name & tagline | `src/config.ts` → `regiment` |
+| Splash-art credit (footer) | `src/config.ts` → `splashArtist` |
 | Discord button & all links | `src/data/links.ts` |
 | Colors (per faction) | `src/styles/global.css` |
 | Splash art & crest | `src/assets/` (+ `src/components/Hero.astro`) |
@@ -67,12 +67,24 @@ Edit `src/data/links.ts`. The `discord` object is the big hero button; the
 in the real ones. To add a card, copy an entry and fill in
 `title` / `description` / `url` (and optional `category`).
 
+### Credit the splash artist
+
+The footer credits whoever made the splash art. Set `splashArtist` in
+`src/config.ts`: give it a `name` and (optionally) an `email`. With an email the
+name becomes a `mailto:` link so people can reach out; leave `email: ""` to show
+the name with no link.
+
 ### Swap the splash art or crests
 
 The artwork lives in `src/assets/`: `broadside.png` (splash) and the two faction
-crests (`ATLASColonialRedStars.png`, `ATLASWardenRedStars.png`). Astro optimizes
+crests (`ATLASColonial.png`, `ATLASWarden.png`). Astro optimizes
 them at build time. To change one, replace the file (keep the name, or update the
 import in `src/components/Hero.astro` / `src/lib/crest.ts`). The crest shown — and
 the favicon — follow the active faction automatically.
 
-> Note: the current art, crests, and colors are placeholders pending final branding.
+The splash fills the screen and its bottom edge **fades** into the page
+background, so the picture dissolves into the site with no hard cut. If you swap
+the splash art, the fade may want a tweak — the how and why are documented in
+[`CLAUDE.md`](./CLAUDE.md).
+
+> Note: the art, crests, and colors are the regiment's final branding.

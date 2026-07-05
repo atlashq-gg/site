@@ -8,21 +8,23 @@
     - "colonial" → green/olive palette
     - "warden"   → blue/steel palette
 
-  To switch: change the value below (or set the PUBLIC_FACTION env var when
-  building, e.g. `PUBLIC_FACTION=warden npm run build`), then rebuild + redeploy.
+  To switch: change FACTION below and push to main — the deploy workflow
+  rebuilds and publishes automatically.
 */
 
 export type Faction = "colonial" | "warden";
 
-const DEFAULT_FACTION: Faction = "colonial";
+const FACTION: Faction = "colonial";
 
-// Env override (optional) — lets the deployer flip factions without editing code.
+// Env override — internal plumbing for scripts/build-previews.mjs, which
+// builds BOTH factions in one run. Not the way to switch the live site's
+// faction; edit FACTION above instead.
 const envFaction = import.meta.env.PUBLIC_FACTION as string | undefined;
 
 export const faction: Faction =
   envFaction === "warden" || envFaction === "colonial"
     ? envFaction
-    : DEFAULT_FACTION;
+    : FACTION;
 
 // Regiment identity — edit these freely.
 export const regiment = {

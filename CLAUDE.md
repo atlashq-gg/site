@@ -73,9 +73,12 @@ does NOT use (the red was dropped from the branding).
 
 - **Faction theme is admin/build-time, NOT a visitor toggle.** ATLAS is mostly
   Colonial (green) but sometimes plays Warden (blue). Both palettes exist in
-  `global.css`; which one ships is set by `DEFAULT_FACTION` in `src/config.ts`, or
-  overridden at build via the `PUBLIC_FACTION` env var (`PUBLIC_FACTION=warden npm run build`).
-  Switching faction = change the value, rebuild, redeploy. Do not reintroduce a
+  `global.css`; which one ships is set by `FACTION` in `src/config.ts`.
+  Switching faction = change that value and push to main (auto-deploys) —
+  content-as-code, same as any other content edit. The `PUBLIC_FACTION` env
+  override in `config.ts` is internal plumbing for `npm run previews` (it
+  builds both factions in one run) — don't document it as a user-facing
+  switch, and don't remove it. Do not reintroduce a
   client-side toggle (the user explicitly rejected it — too much JS / avoids a flash).
 
 - **Colors flow through CSS variables.** Each faction carries its OWN full palette
@@ -129,8 +132,8 @@ project URL `https://p0etc.github.io/atlas-landingpage/` — hence the `base`
 path in `astro.config.mjs`. The regiment owns `atlashq.gg`, but its DNS is
 handled by someone else and isn't set up yet; once it is, set the custom
 domain in the Pages settings and update `site`/`base` in `astro.config.mjs`
-(the comment there says exactly what to change). To ship the Warden theme, set
-`PUBLIC_FACTION: warden` as an env var on the workflow's build step.
+(the comment there says exactly what to change). To ship the Warden theme,
+edit `FACTION` in `src/config.ts` and push — no workflow setting.
 
 The repo has **no open-source license** (all rights reserved), and the artwork
 is used with the artists' permission for this site only — see "License &

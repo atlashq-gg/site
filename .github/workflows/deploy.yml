@@ -23,11 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # The shipped faction comes from FACTION in src/config.ts —
+      # switching theme is a normal code change, not a workflow setting.
       - name: Build site
         uses: withastro/action@v3
-        # To ship the Warden theme instead of the configured default:
-        # env:
-        #   PUBLIC_FACTION: warden
 
   deploy:
     needs: build

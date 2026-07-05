@@ -3,8 +3,8 @@
 
   The regiment crest swings with the active faction (set at build time in
   src/config.ts). Both crest files are imported here so the choice can stay a
-  runtime lookup — that keeps BOTH switch methods working (editing
-  DEFAULT_FACTION in config.ts, or the PUBLIC_FACTION build env var).
+  runtime lookup — that keeps both the FACTION setting in config.ts and the
+  internal PUBLIC_FACTION override (used by `npm run previews`) working.
 
   `inactiveCrest` is exported so Base.astro can run it through the image
   pipeline too. Astro only copies the original, full-size PNG into the build for

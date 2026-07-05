@@ -46,7 +46,7 @@ Everything you'd normally change lives in three places:
 
 | What | Where |
 | --- | --- |
-| Faction theme (Colonial / Warden) | `src/config.ts` → `faction` |
+| Faction theme (Colonial / Warden) | `src/config.ts` → `FACTION` |
 | Regiment name & tagline | `src/config.ts` → `regiment` |
 | Splash-art credit (footer) | `src/config.ts` → `splashArtist` |
 | Crest credit (footer) | `src/config.ts` → `crestArtists` |
@@ -59,10 +59,8 @@ Everything you'd normally change lives in three places:
 The site is mostly Colonial (green) but can switch to Warden (blue). This is an
 **admin/build-time** setting — visitors can't change it; everyone sees what's set.
 
-- Edit `src/config.ts`: `const DEFAULT_FACTION = "colonial"` → `"warden"`, **or**
-- Build with an env var (no code edit): `PUBLIC_FACTION=warden npm run build`
-
-Then rebuild and redeploy.
+Edit `src/config.ts`: `const FACTION = "colonial"` → `"warden"`, then
+commit and merge to `main` — the site rebuilds and deploys automatically.
 
 ### Add or change links
 

@@ -30,3 +30,11 @@ export const regiment = {
   tagline:
     "Camaraderie, skill, achievement — and most importantly, FUN.",
 };
+
+// Splash art credit. The broadside hero art (src/assets/broadside.png) is the
+// work of this artist; the footer credits them with a mailto link so people can
+// reach out. Leave `email` empty ("") to show the name without a link.
+export const splashArtist = {
+  name: "Shyllelagh",
+  email: "shyllelagh.mail@gmail.com",
+};

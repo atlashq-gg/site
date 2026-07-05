@@ -17,7 +17,8 @@ npm run preview  # preview the built ./dist locally
 npm run previews # self-contained share files for both factions (see below)
 ```
 
-The deployer just serves the contents of `dist/` as static files.
+Deploys are automatic: every push to `main` builds the site and publishes it to
+GitHub Pages at <https://atlashq.gg> (see `.github/workflows/deploy.yml`).
 
 ## Show it to people without deploying
 
@@ -93,3 +94,13 @@ the splash art, the fade may want a tweak — the how and why are documented in
 [`CLAUDE.md`](./CLAUDE.md).
 
 > Note: the art, crests, and colors are the regiment's final branding.
+
+## License & artwork rights
+
+This repository has **no open-source license** — all rights reserved. The code
+is published so the regiment can see and host the site, not for reuse.
+
+The artwork (the splash art, both faction crests, and the palette swatches in
+`docs/branding/`) is **© its artists** and is used here with their permission
+for this site only. It is not covered by any license and may **not** be copied,
+reused, or redistributed outside this project.

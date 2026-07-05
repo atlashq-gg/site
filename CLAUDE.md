@@ -7,8 +7,9 @@ Guidance for working in this repository.
 A **static landing page** for **ATLAS**, a Colonial Foxhole regiment formed from the
 merger of *New Colonial Republic (NCR)* and *High Velocity Logistics (HvL)*. It's a
 single-page hub: a full-height splash hero, a Discord call-to-action, and a grid of
-links to the regiment's tools/content. Someone else handles hosting — the
-deliverable is just the built static site in `dist/`.
+links to the regiment's tools/content. Hosted on **GitHub Pages** at
+`https://atlashq.gg` — every push to `main` builds and deploys automatically
+(see "Deploying" below).
 
 > **Branding is FINAL.** The splash artwork (`broadside.png`), both faction
 > logos/crests (`ATLAS{Colonial,Warden}.png`), and the color palettes in
@@ -119,6 +120,21 @@ does NOT use (the red was dropped from the branding).
 - **Zero JavaScript.** The build should ship no `.js`. If a feature seems to need
   client JS, prefer a CSS-only or build-time solution first.
 
+## Deploying
+
+GitHub Pages via GitHub Actions: `.github/workflows/deploy.yml` builds and
+publishes `dist/` on every push to `main` (also manually triggerable via
+`workflow_dispatch`). One-time repo setup lives in GitHub → Settings → Pages:
+source must be "GitHub Actions", and the custom domain `atlashq.gg` is
+configured there (plus DNS A/AAAA records at the registrar). Because the site
+is served from the domain root, `astro.config.mjs` needs no `base` path —
+`site` is set to `https://atlashq.gg`. To ship the Warden theme, set
+`PUBLIC_FACTION: warden` as an env var on the workflow's build step.
+
+The repo has **no open-source license** (all rights reserved), and the artwork
+is used with the artists' permission for this site only — see "License &
+artwork rights" in `README.md`. Don't add a license file without the user.
+
 ## Sharing without deploying
 
 `scripts/make-preview.mjs` inlines a built `dist/` into one **self-contained**
@@ -142,9 +158,8 @@ Use the browser preview (`preview_*` tools) to check layout/appearance, and run
 
 - All link URLs in `src/data/links.ts` except Discord are placeholders (`#`) — the
   regiment fills in their real tool URLs. Discord is live: `https://discord.gg/atlashq`.
-- `site` in `astro.config.mjs` is a placeholder (`https://example.com`) — whoever
-  deploys sets the real URL, otherwise the absolute `og:image` share-preview URLs
-  point at example.com and social embeds show no image.
+- `site` in `astro.config.mjs` is the live URL (`https://atlashq.gg`), so the
+  absolute `og:image` share-preview URLs resolve correctly.
 - Branding is FINAL: splash art (`broadside.png`), both faction crests
   (`ATLAS{Colonial,Warden}.png`), and the color palettes.
 - The hero dissolve is a plain mask-fade into `--bg`. It's palette-independent,

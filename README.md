@@ -46,6 +46,7 @@ Everything you'd normally change lives in three places:
 | Faction theme (Colonial / Warden) | `src/config.ts` → `faction` |
 | Regiment name & tagline | `src/config.ts` → `regiment` |
 | Splash-art credit (footer) | `src/config.ts` → `splashArtist` |
+| Crest credit (footer) | `src/config.ts` → `crestArtists` |
 | Discord button & all links | `src/data/links.ts` |
 | Colors (per faction) | `src/styles/global.css` |
 | Splash art & crest | `src/assets/` (+ `src/components/Hero.astro`) |
@@ -67,12 +68,16 @@ invite URL is live); the `links` array is the grid of cards. The grid URLs are
 placeholders (`#`) — swap in the real ones. To add a card, copy an entry and fill in
 `title` / `description` / `url` (and optional `category`).
 
-### Credit the splash artist
+### Credit the artists
 
-The footer credits whoever made the splash art. Set `splashArtist` in
-`src/config.ts`: give it a `name` and (optionally) an `email`. With an email the
-name becomes a `mailto:` link so people can reach out; leave `email: ""` to show
-the name with no link.
+The footer credits whoever made the art, all set in `src/config.ts`:
+
+- **Splash art:** set `splashArtist` — a `name` and (optionally) an `email`.
+  With an email the name becomes a `mailto:` link so people can reach out;
+  leave `email: ""` to show the name with no link.
+- **Crest:** set `crestArtists` — a list of `{ name, role }` entries shown as
+  "Crest by name (role), …". Names only, no links — that's what the artists
+  asked for. An empty list hides the line.
 
 ### Swap the splash art or crests
 

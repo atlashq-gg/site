@@ -67,7 +67,9 @@ does NOT use (the red was dropped from the branding).
   the regiment name/tagline, or the splash-art credit means editing `src/config.ts`
   or `src/data/links.ts` — not the `.astro` components. (The splash artist is
   credited in the footer via `splashArtist` in `src/config.ts` — name + optional
-  mailto; leave `email: ""` to show the name without a link.)
+  mailto; leave `email: ""` to show the name without a link. The crest
+  contributors are credited via `crestArtists` in the same file — names + roles
+  only, deliberately WITHOUT links: the artists asked for no socials/email.)
 
 - **Faction theme is admin/build-time, NOT a visitor toggle.** ATLAS is mostly
   Colonial (green) but sometimes plays Warden (blue). Both palettes exist in

@@ -38,3 +38,12 @@ export const splashArtist = {
   name: "Shyllelagh",
   email: "shyllelagh.mail@gmail.com",
 };
+
+// Crest credit. The ATLAS crests were a group effort; the footer lists each
+// contributor with their part. Names only — the artists asked for no links
+// (no socials, no email). An empty array hides the line.
+export const crestArtists = [
+  { name: "ambientlamp", role: "original idea" },
+  { name: "Endet", role: "coloring, shading & touch-ups" },
+  { name: "Zultragash", role: "border design" },
+];

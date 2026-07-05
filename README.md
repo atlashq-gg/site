@@ -62,9 +62,9 @@ Then rebuild and redeploy.
 
 ### Add or change links
 
-Edit `src/data/links.ts`. The `discord` object is the big hero button; the
-`links` array is the grid of cards. All URLs there are placeholders (`#`) — swap
-in the real ones. To add a card, copy an entry and fill in
+Edit `src/data/links.ts`. The `discord` object is the big hero button (its
+invite URL is live); the `links` array is the grid of cards. The grid URLs are
+placeholders (`#`) — swap in the real ones. To add a card, copy an entry and fill in
 `title` / `description` / `url` (and optional `category`).
 
 ### Credit the splash artist

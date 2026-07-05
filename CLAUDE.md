@@ -50,8 +50,10 @@ src/
     LinkGrid.astro     # "Quick Links" section, maps over links data
     LinkCard.astro     # one link tile
   pages/index.astro    # composes: Hero → LinkGrid → footer; defines the (transparent) .content-over wrapper + artist credit
-public/favicon.svg     # legacy placeholder; the live favicon is generated from the crest
 ```
+
+(There is no `public/` directory — the favicon is generated from the crest in
+`Base.astro`, so nothing is copied verbatim into `dist/`.)
 
 ## Key conventions & decisions
 
@@ -132,6 +134,9 @@ Use the browser preview (`preview_*` tools) to check layout/appearance, and run
 
 - All link URLs in `src/data/links.ts` except Discord are placeholders (`#`) — the
   regiment fills in their real tool URLs. Discord is live: `https://discord.gg/atlashq`.
+- `site` in `astro.config.mjs` is a placeholder (`https://example.com`) — whoever
+  deploys sets the real URL, otherwise the absolute `og:image` share-preview URLs
+  point at example.com and social embeds show no image.
 - Branding is FINAL: splash art (`broadside.png`), both faction crests
   (`ATLAS{Colonial,Warden}.png`), and the color palettes.
 - The hero dissolve is a plain mask-fade into `--bg`. It's palette-independent,

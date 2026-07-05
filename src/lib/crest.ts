@@ -9,11 +9,11 @@
   `inactiveCrest` is exported so Base.astro can run it through the image
   pipeline too. Astro only copies the original, full-size PNG into the build for
   an imported image that is NEVER processed; processing the inactive crest into
-  a throwaway derivative keeps its ~1.7 MB original out of dist/.
+  a throwaway derivative keeps its ~1 MB original out of dist/.
 */
 import { faction } from "../config";
-import colonialCrest from "../assets/ATLASColonialRedStars.png";
-import wardenCrest from "../assets/ATLASWardenRedStars.png";
+import colonialCrest from "../assets/ATLASColonial.png";
+import wardenCrest from "../assets/ATLASWarden.png";
 
 export const activeCrest = faction === "warden" ? wardenCrest : colonialCrest;
 export const inactiveCrest = faction === "warden" ? colonialCrest : wardenCrest;

@@ -3,11 +3,6 @@ import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import LinkGrid from "../components/LinkGrid.astro";
 import { regiment, splashArtist, crestArtists } from "../config";
-
-// "ambientlamp (original idea), Endet (coloring, shading & touch-ups), …"
-const crestCredit = crestArtists
-  .map(({ name, role }) => `${name} (${role})`)
-  .join(", ");
 ---
 
 <Base>
@@ -44,12 +39,22 @@ const crestCredit = crestArtists
                     {splashArtist.name}
                   </a>
                 ) : (
-                  splashArtist.name
+                  <span class="font-medium text-accent-strong">{splashArtist.name}</span>
                 )}
               </span>
             )
           }
-          {crestCredit && <span>Crest by {crestCredit}</span>}
+          {
+            crestArtists.length > 0 && (
+              <span>
+                Crest by{" "}
+                {crestArtists.map(({ name, role }, i) => (
+                  /* prettier-ignore */
+                  <>{i > 0 && ", "}<span class="font-medium text-accent-strong">{name}</span> ({role})</>
+                ))}
+              </span>
+            )
+          }
         </div>
       </div>
     </footer>

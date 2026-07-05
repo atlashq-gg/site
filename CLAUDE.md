@@ -59,8 +59,7 @@ docs/branding/         # artist's palette swatches ({Colonial,Warden}ColorPalett
 The swatch PNGs in `docs/branding/` are the source of truth behind the CSS
 palettes: their stripes map 1:1 to `--muted`, `--surface`, `--surface-2`, and
 `--accent` in `global.css`. Each also has a red stripe the site deliberately
-does NOT use (the red was dropped from the branding; it survives only as the
-sticky-note push-pin on Warden builds).
+does NOT use (the red was dropped from the branding).
 
 ## Key conventions & decisions
 

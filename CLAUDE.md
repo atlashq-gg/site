@@ -43,6 +43,9 @@ src/
     broadside.png        # splash art (wide, dark, ~5200x2000)
     ATLASColonial.png    # Colonial crest (olive/gold)
     ATLASWarden.png      # Warden crest (navy/steel)
+    logos/               # pre-sized crest PNGs (256/128/64) for use OUTSIDE the site
+                         # (Discord etc.) — deliberately never imported, so Astro
+                         # keeps them out of dist/
   styles/global.css    # faction color palettes (CSS vars) + Tailwind @theme tokens
   layouts/Base.astro   # <head>, meta, stamps data-faction; builds favicon + OG image
   components/

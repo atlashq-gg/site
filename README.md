@@ -18,9 +18,8 @@ npm run previews # self-contained share files for both factions (see below)
 ```
 
 Deploys are automatic: every push to `main` builds the site and publishes it to
-GitHub Pages (see `.github/workflows/deploy.yml`). It currently serves at
-<https://p0etc.github.io/atlas-landingpage/>; it moves to <https://atlashq.gg>
-once the domain's DNS is set up.
+GitHub Pages (see `.github/workflows/deploy.yml`), live at
+<https://atlashq.gg>.
 
 ## Show it to people without deploying
 

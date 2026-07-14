@@ -130,13 +130,11 @@ does NOT use (the red was dropped from the branding).
 GitHub Pages via GitHub Actions: `.github/workflows/deploy.yml` builds and
 publishes `dist/` on every push to `main` (also manually triggerable via
 `workflow_dispatch`). One-time repo setup lives in GitHub → Settings → Pages:
-source must be "GitHub Actions". The site currently serves at the default
-project URL `https://p0etc.github.io/atlas-landingpage/` — hence the `base`
-path in `astro.config.mjs`. The regiment owns `atlashq.gg`, but its DNS is
-handled by someone else and isn't set up yet; once it is, set the custom
-domain in the Pages settings and update `site`/`base` in `astro.config.mjs`
-(the comment there says exactly what to change). To ship the Warden theme,
-edit `FACTION` in `src/config.ts` and push — no workflow setting.
+source must be "GitHub Actions", custom domain `atlashq.gg` (DNS is managed
+outside this repo). The site serves at `https://atlashq.gg` — a custom domain
+serves from the domain root, so `astro.config.mjs` sets `site` and no `base`.
+To ship the Warden theme, edit `FACTION` in `src/config.ts` and push — no
+workflow setting.
 
 The repo has **no open-source license** (all rights reserved), and the artwork
 is used with the artists' permission for this site only — see "License &
@@ -165,9 +163,6 @@ Use the browser preview (`preview_*` tools) to check layout/appearance, and run
 
 - All link URLs in `src/data/links.ts` except Discord are placeholders (`#`) — the
   regiment fills in their real tool URLs. Discord is live: `https://discord.gg/atlashq`.
-- `site`/`base` in `astro.config.mjs` point at the default GitHub Pages
-  project URL for now. Switch to `https://atlashq.gg` (no `base`) once the
-  domain's DNS is live — it's managed outside this repo, timing unknown.
 - Branding is FINAL: splash art (`broadside.png`), both faction crests
   (`ATLAS{Colonial,Warden}.png`), and the color palettes.
 - The hero dissolve is a plain mask-fade into `--bg`. It's palette-independent,

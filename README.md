@@ -4,9 +4,6 @@ A static, single-page hub for the regiment — a splash screen plus links to our
 Discord and the tools/content we run. Built with [Astro](https://astro.build) +
 [Tailwind CSS](https://tailwindcss.com). Ships **zero JavaScript**.
 
-> ✅ **Branding is final** — splash artwork, both faction crests, and the color
-> palettes.
-
 ## Develop
 
 ```bash
@@ -63,8 +60,8 @@ commit and merge to `main` — the site rebuilds and deploys automatically.
 
 ### Add or change links
 
-Edit `src/data/links.ts`. The `discord` object is the big hero button (its
-invite URL is live); the `links` array is the grid of cards. The grid URLs are
+Edit `src/data/links.ts`. The `discord` object is the big hero button; the
+`links` array is the grid of cards. The grid URLs are
 placeholders (`#`) — swap in the real ones. To add a card, copy an entry and fill in
 `title` / `description` / `url` (and optional `category`).
 
@@ -92,8 +89,6 @@ background, so the picture dissolves into the site with no hard cut. If you swap
 the splash art, the fade may want a tweak — the how and why are documented in
 [`CLAUDE.md`](./CLAUDE.md).
 
-> Note: the art, crests, and colors are the regiment's final branding.
-
 ## License & artwork rights
 
 This repository has **no open-source license** — all rights reserved. The code
@@ -103,3 +98,8 @@ The artwork (the splash art, both faction crests, and the palette swatches in
 `docs/branding/`) is **© its artists** and is used here with their permission
 for this site only. It is not covered by any license and may **not** be copied,
 reused, or redistributed outside this project.
+
+The one third-party asset is the display font **Oswald**
+(`src/assets/fonts/oswald-variable.woff2`), self-hosted under the **SIL Open Font
+License 1.1** — its license text ships alongside it in `src/assets/fonts/OFL.txt`.
+The OFL covers only the font, not the rest of this repository.

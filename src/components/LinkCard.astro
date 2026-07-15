@@ -6,13 +6,24 @@ interface Props {
 }
 
 const { item } = Astro.props;
+
+// URLs still set to "#" are placeholders (see src/data/links.ts). Render those
+// as a non-interactive, dimmed card instead of a link that opens a blank tab.
+const isPlaceholder = item.url === "#";
+const Tag = isPlaceholder ? "div" : "a";
 ---
 
-<a
-  href={item.url}
-  target="_blank"
-  rel="noopener noreferrer"
-  class="group relative flex h-full flex-col rounded-lg border border-border bg-surface p-5 transition hover:-translate-y-0.5 hover:border-accent hover:bg-surface-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong"
+<Tag
+  href={isPlaceholder ? undefined : item.url}
+  target={isPlaceholder ? undefined : "_blank"}
+  rel={isPlaceholder ? undefined : "noopener noreferrer"}
+  aria-disabled={isPlaceholder ? "true" : undefined}
+  class:list={[
+    "group relative flex h-full flex-col rounded-lg border border-border bg-surface p-5 transition",
+    isPlaceholder
+      ? "cursor-default opacity-60"
+      : "hover:-translate-y-0.5 hover:border-accent hover:bg-surface-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong",
+  ]}
 >
   {
     item.category && (
@@ -29,9 +40,12 @@ const { item } = Astro.props;
   <p class="mt-1 text-sm leading-relaxed text-muted">{item.description}</p>
 
   <span
-    class="mt-auto pt-4 text-sm font-medium text-muted transition group-hover:text-accent-strong"
+    class:list={[
+      "mt-auto pt-4 text-sm font-medium text-muted transition",
+      !isPlaceholder && "group-hover:text-accent-strong",
+    ]}
     aria-hidden="true"
   >
-    Open →
+    {isPlaceholder ? "Coming soon" : "Open →"}
   </span>
-</a>
+</Tag>

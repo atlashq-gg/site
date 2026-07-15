@@ -10,10 +10,6 @@ single-page hub: a full-height splash hero, a Discord call-to-action, and a grid
 links to the regiment's tools/content. Hosted on **GitHub Pages** — every push
 to `main` builds and deploys automatically (see "Deploying" below).
 
-> **Branding is FINAL.** The splash artwork (`broadside.png`), both faction
-> logos/crests (`ATLAS{Colonial,Warden}.png`), and the color palettes in
-> `global.css` are the regiment's settled branding.
-
 ## Stack
 
 - **Astro 5** (static output, zero client-side JavaScript)
@@ -46,6 +42,8 @@ src/
     logos/               # pre-sized crest PNGs (256/128/64) for use OUTSIDE the site
                          # (Discord etc.) — deliberately never imported, so Astro
                          # keeps them out of dist/
+    fonts/               # self-hosted display font (Oswald, SIL OFL 1.1) + OFL.txt;
+                         # bundled at build via url() in global.css, no runtime fetch
   styles/global.css    # faction color palettes (CSS vars) + Tailwind @theme tokens
   layouts/Base.astro   # <head>, meta, stamps data-faction; builds favicon + OG image
   components/
@@ -54,15 +52,17 @@ src/
     LinkCard.astro     # one link tile
   pages/index.astro    # composes: Hero → LinkGrid → footer; defines the (transparent) .content-over wrapper + artist credit
 docs/branding/         # artist's palette swatches ({Colonial,Warden}ColorPalette.png) — reference only, not part of the build
+public/CNAME           # pins the custom domain (atlashq.gg) into the deploy; copied verbatim to dist/
 ```
 
-(There is no `public/` directory — the favicon is generated from the crest in
-`Base.astro`, so nothing is copied verbatim into `dist/`.)
+(`public/` holds only `CNAME` — the one file that must reach `dist/` verbatim to
+hold the custom domain. Everything else is generated: the favicon is derived from
+the crest in `Base.astro`, and other assets are hashed through Astro's pipeline.)
 
 The swatch PNGs in `docs/branding/` are the source of truth behind the CSS
 palettes: their stripes map 1:1 to `--muted`, `--surface`, `--surface-2`, and
 `--accent` in `global.css`. Each also has a red stripe the site deliberately
-does NOT use (the red was dropped from the branding).
+does NOT use.
 
 ## Key conventions & decisions
 
@@ -91,7 +91,6 @@ does NOT use (the red was dropped from the branding).
   `--accent`, `--accent-strong`, `--accent-contrast`.
   Tailwind utilities like `bg-accent` / `text-muted` map to these via `@theme`.
   To recolor, edit the variables in `global.css` — not utility classes everywhere.
-  These palettes are the FINAL branding.
 
 - **Splash art + crest are real, faction-aware images.** `Hero.astro` renders
   `broadside.png` via Astro `<Image>` in `.hero-art`. The faction crest sits above
@@ -162,10 +161,4 @@ Use the browser preview (`preview_*` tools) to check layout/appearance, and run
 ## Status / TODO
 
 - All link URLs in `src/data/links.ts` except Discord are placeholders (`#`) — the
-  regiment fills in their real tool URLs. Discord is live: `https://discord.gg/atlashq`.
-- Branding is FINAL: splash art (`broadside.png`), both faction crests
-  (`ATLAS{Colonial,Warden}.png`), and the color palettes.
-- The hero dissolve is a plain mask-fade into `--bg`. It's palette-independent,
-  so it works for both factions as-is.
-- The "Who We Are" / About section was removed by request (along with
-  `src/components/About.astro` and `src/data/content.ts`).
+  regiment fills in their real tool URLs.

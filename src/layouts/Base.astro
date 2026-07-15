@@ -28,6 +28,11 @@ await getImage({ src: inactiveCrest, width: 1, height: 1, format: "webp" });
 const ogImageUrl = Astro.site
   ? new URL(ogImage.src, Astro.site).href
   : ogImage.src;
+
+// Canonical / share URL for this page (absolute when `site` is configured).
+const canonicalUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -37,11 +42,13 @@ const ogImageUrl = Astro.site
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href={favicon.src} />
     <link rel="apple-touch-icon" href={appleIcon.src} />
+    <link rel="canonical" href={canonicalUrl} />
     <title>{title}</title>
     <meta name="description" content={description} />
 
     <!-- Social / share preview -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />

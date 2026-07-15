@@ -103,3 +103,8 @@ The artwork (the splash art, both faction crests, and the palette swatches in
 `docs/branding/`) is **© its artists** and is used here with their permission
 for this site only. It is not covered by any license and may **not** be copied,
 reused, or redistributed outside this project.
+
+The one third-party asset is the display font **Oswald**
+(`src/assets/fonts/oswald-variable.woff2`), self-hosted under the **SIL Open Font
+License 1.1** — its license text ships alongside it in `src/assets/fonts/OFL.txt`.
+The OFL covers only the font, not the rest of this repository.

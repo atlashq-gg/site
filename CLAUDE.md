@@ -46,6 +46,8 @@ src/
     logos/               # pre-sized crest PNGs (256/128/64) for use OUTSIDE the site
                          # (Discord etc.) — deliberately never imported, so Astro
                          # keeps them out of dist/
+    fonts/               # self-hosted display font (Oswald, SIL OFL 1.1) + OFL.txt;
+                         # bundled at build via url() in global.css, no runtime fetch
   styles/global.css    # faction color palettes (CSS vars) + Tailwind @theme tokens
   layouts/Base.astro   # <head>, meta, stamps data-faction; builds favicon + OG image
   components/

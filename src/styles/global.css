@@ -1,6 +1,20 @@
 @import "tailwindcss";
 
 /*
+  Self-hosted display font. Oswald (SIL OFL 1.1 — see assets/fonts/OFL.txt) is
+  the condensed face used for headings via --font-display. Bundled at build by
+  Vite (the url() below is hashed into dist/), so there are NO runtime network
+  requests. Variable weight axis 200–700 covers every heading weight in use.
+*/
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("../assets/fonts/oswald-variable.woff2") format("woff2");
+}
+
+/*
   ── Faction theming ────────────────────────────────────────────────────────
   Both palettes are defined here. Which one is active is decided at BUILD TIME
   by `faction` in src/config.ts (Base.astro stamps it onto <html data-faction>).

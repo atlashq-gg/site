@@ -56,10 +56,12 @@ src/
     LinkCard.astro     # one link tile
   pages/index.astro    # composes: Hero → LinkGrid → footer; defines the (transparent) .content-over wrapper + artist credit
 docs/branding/         # artist's palette swatches ({Colonial,Warden}ColorPalette.png) — reference only, not part of the build
+public/CNAME           # pins the custom domain (atlashq.gg) into the deploy; copied verbatim to dist/
 ```
 
-(There is no `public/` directory — the favicon is generated from the crest in
-`Base.astro`, so nothing is copied verbatim into `dist/`.)
+(`public/` holds only `CNAME` — the one file that must reach `dist/` verbatim to
+hold the custom domain. Everything else is generated: the favicon is derived from
+the crest in `Base.astro`, and other assets are hashed through Astro's pipeline.)
 
 The swatch PNGs in `docs/branding/` are the source of truth behind the CSS
 palettes: their stripes map 1:1 to `--muted`, `--surface`, `--surface-2`, and

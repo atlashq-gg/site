@@ -33,6 +33,10 @@ const mime = {
   ".svg": "image/svg+xml",
   ".avif": "image/avif",
   ".gif": "image/gif",
+  ".woff2": "font/woff2",
+  ".woff": "font/woff",
+  ".ttf": "font/ttf",
+  ".otf": "font/otf",
 };
 
 function dataUri(ref) {
@@ -52,10 +56,11 @@ html = html.replace(/<link[^>]*rel="stylesheet"[^>]*>/g, (tag) => {
   return fs.existsSync(p) ? `<style>${fs.readFileSync(p, "utf8")}</style>` : tag;
 });
 
-// 2) Inline every /_astro asset reference (src, srcset entries, href, css url())
+// 2) Inline every /_astro asset reference (img src/srcset, href, and the
+//    self-hosted font's css url() — now folded into the <style> from step 1)
 let inlined = 0;
 html = html.replace(
-  /\/_astro\/[A-Za-z0-9._-]+\.(?:webp|png|jpe?g|svg|avif|gif)/g,
+  /\/_astro\/[A-Za-z0-9._-]+\.(?:webp|png|jpe?g|svg|avif|gif|woff2?|ttf|otf)/g,
   (ref) => {
     const d = dataUri(ref);
     if (d) inlined++;
